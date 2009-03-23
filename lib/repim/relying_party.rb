@@ -68,7 +68,8 @@ module Repim
 
     def signup(identity_url, ax = {})
       session[:identity_url] = identity_url
-      @user = user_klass.new( attribute_adapter ? attribute_adapter.adapt(ax) : {} )
+      # got to override when I need change instance create strategy.
+      @account = user_klass.new( attribute_adapter ? attribute_adapter.adapt(ax) : {} )
     end
 
     # log sign in faulure. and re-render sessions/new
