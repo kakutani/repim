@@ -43,14 +43,15 @@ module Repim
     def destroy
       session[:user_id] = nil
       reset_session
-      flash[:notice] = "You have been logged out."
+      flash[:notice] = "You have been signed out."
 
       redirect_back_or(after_logout_path)
     end
 
     private
     def authenticate_success(identity_url, personal_data = {})
-      if user = user_klass.find_by_identity_url(identity_url)
+      if user = Account.find_by_identity_url(identity_url)
+#      if user = user_klass.find_by_identity_url(identity_url)
         login_successfully(user, personal_data)
         redirect_back_or(after_login_path)
       else

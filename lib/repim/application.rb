@@ -45,7 +45,7 @@ module Repim
     end
 
     def user_from_session
-      session[:user_id] && user_klass.find_by_id(session[:user_id])
+      session[:user_id] && Account.find_by_id(session[:user_id])
     end
 
     def redirect_back_or(default)
