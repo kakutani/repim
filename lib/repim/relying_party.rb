@@ -7,7 +7,7 @@ module Repim
       base.cattr_accessor :signup_template
 
       base.skip_before_filter :authenticate
-      base.signup_template = "users/new"
+      base.signup_template = "users/new" # will be nice if configurable
 
       base.extend(ClassMethods)
     end
