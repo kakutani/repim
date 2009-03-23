@@ -71,10 +71,10 @@ module Repim
       @user = user_klass.new( attribute_adapter ? attribute_adapter.adapt(ax) : {} )
     end
 
-    # log login faulure. and re-render sessions/new
+    # log sign in faulure. and re-render sessions/new
     def authenticate_failure(assigns = params)
-      flash[:error] = "Couldn't log you in as '#{assigns[:openid_url] || assigns["openid.claimed_id"]}'"
-      logger.warn "Failed login for '#{assigns[:openid_url]}' from #{request.remote_ip} at #{Time.now.utc}"
+      flash[:error] = "Couldn't sign you in as '#{assigns[:openid_url] || assigns["openid.claimed_id"]}'"
+      logger.warn "Failed signin for '#{assigns[:openid_url]}' from #{request.remote_ip} at #{Time.now.utc}"
 
       @openid_url  = assigns[:openid_url]
 
@@ -82,7 +82,7 @@ module Repim
     end
 
     def after_login_path; root_path ; end
-    def after_logout_path; login_path ; end
+    def after_logout_path; signin_path ; end
 
     def method_missing(m, *args, &b)
       return [request.protocol, request.host_with_port, "/"].join if m.to_sym == :root_url
